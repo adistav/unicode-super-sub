@@ -53,7 +53,7 @@ SINGLE_KEY_SYMBOLS = [
     ("grave_accent_and_tilde", [],      0x2034),    # ‴  `
 ]
 
-# ── two-key mode (⌥⌃`) ────────────────────────────────────────────────────────
+# ── two-key mode (⌥⌃/) ────────────────────────────────────────────────────────
 
 # Currencies: (iso3166_two_letter_code, codepoint)
 CURRENCIES = [
@@ -276,7 +276,7 @@ out = {
         "description": (
             "⌥⌃= superscript  ⌥⌃- subscript  "
             "⌥⌃\\ single-key (arrows ×, ℕℤℚℝℂ, primes, punct)  "
-            "⌥⌃` two-key (fractions num+den, currencies country-code)"
+            "⌥⌃/ two-key (fractions num+den, currencies country-code)"
         ),
         "manipulators": manipulators,
     }],

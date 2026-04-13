@@ -2,7 +2,7 @@
   "title": "Unicode symbols",
   "rules": [
     {
-      "description": "⌥⌃= superscript  ⌥⌃- subscript  ⌥⌃\\ single-key (arrows ×, ℕℤℚℝℂ, primes, punct)  ⌥⌃` two-key (fractions num+den, currencies country-code)",
+      "description": "⌥⌃= superscript  ⌥⌃- subscript  ⌥⌃\\ single-key (arrows ×, ℕℤℚℝℂ, primes, punct)  ⌥⌃/ two-key (fractions num+den, currencies country-code)",
       "manipulators": [
         {
           "type": "basic",
