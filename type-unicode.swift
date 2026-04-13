@@ -3,7 +3,7 @@ import Cocoa
 guard CommandLine.arguments.count == 3,
       let inputCP = UInt32(CommandLine.arguments[2]) else { exit(1) }
 
-let mode = CommandLine.arguments[1]  // "sup" or "sub"
+let mode = CommandLine.arguments[1]  // "sup", "sub", or "direct"
 
 let superMap: [UInt32: UInt32] = [
     // Digits
@@ -43,7 +43,8 @@ let subMap: [UInt32: UInt32] = [
     0x03B2: 0x1D66, 0x03B3: 0x1D67, 0x03C1: 0x1D68, 0x03C6: 0x1D69, 0x03C7: 0x1D6A,
 ]
 
-let outputCP = (mode == "sup" ? superMap : subMap)[inputCP] ?? inputCP
+let outputCP: UInt32 = mode == "direct" ? inputCP
+    : (mode == "sup" ? superMap : subMap)[inputCP] ?? inputCP
 guard Unicode.Scalar(outputCP) != nil else { exit(1) }
 
 let appName = NSWorkspace.shared.frontmostApplication?.localizedName ?? ""
