@@ -1,4 +1,4 @@
-import CoreGraphics
+import Cocoa
 
 guard CommandLine.arguments.count == 3,
       let inputCP = UInt32(CommandLine.arguments[2]) else { exit(1) }
@@ -45,13 +45,23 @@ let subMap: [UInt32: UInt32] = [
 
 let outputCP: UInt32 = mode == "direct" ? inputCP
     : (mode == "sup" ? superMap : subMap)[inputCP] ?? inputCP
-guard let scalar = Unicode.Scalar(outputCP) else { exit(1) }
+guard Unicode.Scalar(outputCP) != nil else { exit(1) }
 
-let utf16 = Array(String(scalar).utf16)
-let src = CGEventSource(stateID: .hidSystemState)
-let dn = CGEvent(keyboardEventSource: src, virtualKey: 0, keyDown: true)!
-let up = CGEvent(keyboardEventSource: src, virtualKey: 0, keyDown: false)!
-dn.keyboardSetUnicodeString(stringLength: utf16.count, unicodeString: utf16)
-up.keyboardSetUnicodeString(stringLength: utf16.count, unicodeString: utf16)
-dn.post(tap: .cghidEventTap)
-up.post(tap: .cghidEventTap)
+let appName = NSWorkspace.shared.frontmostApplication?.localizedName ?? ""
+
+if appName == "iTerm2" {
+    var err: NSDictionary?
+    NSAppleScript(source: "tell application \"iTerm2\" to tell current session of current window to write text (character id \(outputCP)) newline NO")!
+        .executeAndReturnError(&err)
+} else {
+    let pb = NSPasteboard.general
+    let saved = pb.string(forType: .string)
+    pb.clearContents()
+    pb.setString(String(Unicode.Scalar(outputCP)!), forType: .string)
+    var err: NSDictionary?
+    NSAppleScript(source: "tell application \"System Events\" to keystroke \"v\" using command down")!
+        .executeAndReturnError(&err)
+    Thread.sleep(forTimeInterval: 0.05)
+    pb.clearContents()
+    if let s = saved { pb.setString(s, forType: .string) }
+}
