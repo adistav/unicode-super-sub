@@ -53,7 +53,7 @@ SINGLE_KEY_SYMBOLS = [
     ("k",                       [],             0x2191),    # ↑
     ("l",                       [],             0x2192),    # →
     ("hyphen",                  [],             0x2194),    # ↔  -
-    ("equal_sign",              [],             0x21D4),    # ⇔  =
+    ("equal_sign",              [],             0x2195),    # ↕  =
     # Quantifiers
     ("a",                       [],             0x2200),    # ∀
     ("e",                       [],             0x2203),    # ∃
@@ -94,8 +94,10 @@ NEGATION_SYMBOLS = [
 # Or-equal (⌥⌃/ → =): shift rules before non-shift.
 OR_EQUAL_SYMBOLS = [
     # key_code          mandatory       codepoint
+    ("backslash",       ["shift"],      0x21D5),    # ⇕  |
     ("comma",           ["shift"],      0x2286),    # ⊆  <
     ("period",          ["shift"],      0x2287),    # ⊇  >
+    ("hyphen",          [],             0x21D4),    # ⇔  -
     ("equal_sign",      [],             0x2261),    # ≡  =
 ]
 

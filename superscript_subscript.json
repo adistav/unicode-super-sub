@@ -5096,7 +5096,7 @@
           },
           "to": [
             {
-              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8660"
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8597"
             },
             {
               "set_variable": {
@@ -7025,6 +7025,38 @@
             }
           ],
           "from": {
+            "key_code": "backslash",
+            "modifiers": {
+              "optional": [
+                "any"
+              ],
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8661"
+            },
+            {
+              "set_variable": {
+                "name": "ss_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "ss_mode",
+              "value": 14
+            }
+          ],
+          "from": {
             "key_code": "comma",
             "modifiers": {
               "optional": [
@@ -7070,6 +7102,35 @@
           "to": [
             {
               "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8839"
+            },
+            {
+              "set_variable": {
+                "name": "ss_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "ss_mode",
+              "value": 14
+            }
+          ],
+          "from": {
+            "key_code": "hyphen",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8660"
             },
             {
               "set_variable": {
