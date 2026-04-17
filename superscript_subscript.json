@@ -4818,6 +4818,134 @@
             "modifiers": {
               "optional": [
                 "any"
+              ],
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8656"
+            },
+            {
+              "set_variable": {
+                "name": "ss_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "ss_mode",
+              "value": 3
+            }
+          ],
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "optional": [
+                "any"
+              ],
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8659"
+            },
+            {
+              "set_variable": {
+                "name": "ss_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "ss_mode",
+              "value": 3
+            }
+          ],
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "optional": [
+                "any"
+              ],
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8657"
+            },
+            {
+              "set_variable": {
+                "name": "ss_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "ss_mode",
+              "value": 3
+            }
+          ],
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "optional": [
+                "any"
+              ],
+              "mandatory": [
+                "shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8658"
+            },
+            {
+              "set_variable": {
+                "name": "ss_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "ss_mode",
+              "value": 3
+            }
+          ],
+          "from": {
+            "key_code": "h",
+            "modifiers": {
+              "optional": [
+                "any"
               ]
             }
           },
@@ -4911,6 +5039,64 @@
           "to": [
             {
               "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8594"
+            },
+            {
+              "set_variable": {
+                "name": "ss_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "ss_mode",
+              "value": 3
+            }
+          ],
+          "from": {
+            "key_code": "hyphen",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8596"
+            },
+            {
+              "set_variable": {
+                "name": "ss_mode",
+                "value": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "variable_if",
+              "name": "ss_mode",
+              "value": 3
+            }
+          ],
+          "from": {
+            "key_code": "equal_sign",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8660"
             },
             {
               "set_variable": {

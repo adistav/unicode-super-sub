@@ -43,11 +43,17 @@ SINGLE_KEY_SYMBOLS = [
     # Kept punctuation (shifted)
     ("n",                       ["shift"],      0x2116),    # №  N
     ("quote",                   ["shift"],      0x2033),    # ″  "
-    # Arrows
+    # Arrows (single and double, directional and double-ended)
+    ("h",                       ["shift"],      0x21D0),    # ⇐  H
+    ("j",                       ["shift"],      0x21D3),    # ⇓  J
+    ("k",                       ["shift"],      0x21D1),    # ⇑  K
+    ("l",                       ["shift"],      0x21D2),    # ⇒  L
     ("h",                       [],             0x2190),    # ←
     ("j",                       [],             0x2193),    # ↓
     ("k",                       [],             0x2191),    # ↑
     ("l",                       [],             0x2192),    # →
+    ("hyphen",                  [],             0x2194),    # ↔  -
+    ("equal_sign",              [],             0x21D4),    # ⇔  =
     # Quantifiers
     ("a",                       [],             0x2200),    # ∀
     ("e",                       [],             0x2203),    # ∃
