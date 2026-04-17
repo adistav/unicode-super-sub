@@ -29,31 +29,71 @@ GREEK_SUBS = [
 ]
 
 # ── single-key mode (⌥⌃\) ─────────────────────────────────────────────────────
-# Shift rules before non-shift rules.
+# Shift rules before non-shift rules (more specific first).
 
 SINGLE_KEY_SYMBOLS = [
-    # key_code          mandatory       codepoint   comment
-    ("comma",           ["shift"],      0x2039),    # ‹  <
-    ("period",          ["shift"],      0x203A),    # ›  >
-    ("n",               ["shift"],      0x2116),    # №  N
-    ("8",               ["shift"],      0x2042),    # ⁂  *
-    ("1",               ["shift"],      0x203D),    # ‽  !
-    ("quote",           ["shift"],      0x2033),    # ″  "
-    ("h",               [],             0x2190),    # ←
-    ("j",               [],             0x2193),    # ↓
-    ("k",               [],             0x2191),    # ↑
-    ("l",               [],             0x2192),    # →
-    ("slash",           [],             0x00D7),    # ×
-    ("n",               [],             0x2115),    # ℕ
-    ("z",               [],             0x2124),    # ℤ
-    ("q",               [],             0x211A),    # ℚ
-    ("r",               [],             0x211D),    # ℝ
-    ("c",               [],             0x2102),    # ℂ
-    ("quote",           [],             0x2032),    # ′  '
-    ("grave_accent_and_tilde", [],      0x2034),    # ‴  `
+    # key_code                  mandatory       codepoint
+    # Logic / set operators (shifted keys)
+    ("1",                       ["shift"],      0x00AC),    # ¬  !
+    ("6",                       ["shift"],      0x2295),    # ⊕  ^
+    ("7",                       ["shift"],      0x2227),    # ∧  &
+    ("8",                       ["shift"],      0x00D7),    # ×  *
+    ("backslash",               ["shift"],      0x2228),    # ∨  |
+    ("comma",                   ["shift"],      0x2282),    # ⊂  <
+    ("period",                  ["shift"],      0x2283),    # ⊃  >
+    # Kept punctuation (shifted)
+    ("n",                       ["shift"],      0x2116),    # №  N
+    ("quote",                   ["shift"],      0x2033),    # ″  "
+    # Arrows
+    ("h",                       [],             0x2190),    # ←
+    ("j",                       [],             0x2193),    # ↓
+    ("k",                       [],             0x2191),    # ↑
+    ("l",                       [],             0x2192),    # →
+    # Quantifiers
+    ("a",                       [],             0x2200),    # ∀
+    ("e",                       [],             0x2203),    # ∃
+    # Set operators
+    ("u",                       [],             0x222A),    # ∪
+    ("i",                       [],             0x2229),    # ∩
+    ("open_bracket",            [],             0x2208),    # ∈  [
+    ("close_bracket",           [],             0x220B),    # ∋  ]
+    ("0",                       [],             0x2205),    # ∅
+    ("backslash",               [],             0x2216),    # ∖  \
+    ("d",                       [],             0x25B3),    # △
+    ("p",                       [],             0x1D4AB),   # 𝒫
+    # Number sets
+    ("n",                       [],             0x2115),    # ℕ
+    ("z",                       [],             0x2124),    # ℤ
+    ("q",                       [],             0x211A),    # ℚ
+    ("r",                       [],             0x211D),    # ℝ
+    ("c",                       [],             0x2102),    # ℂ
+    # Primes / misc
+    ("quote",                   [],             0x2032),    # ′  '
+    ("grave_accent_and_tilde",  [],             0x2034),    # ‴  `
 ]
 
 # ── two-key mode (⌥⌃/) ────────────────────────────────────────────────────────
+
+# Negation (⌥⌃/ → !): shift rules before non-shift.
+NEGATION_SYMBOLS = [
+    # key_code          mandatory       codepoint
+    ("comma",           ["shift"],      0x2284),    # ⊄  <
+    ("period",          ["shift"],      0x2285),    # ⊅  >
+    ("open_bracket",    [],             0x2209),    # ∉  [
+    ("close_bracket",   [],             0x220C),    # ∌  ]
+    ("comma",           [],             0x2288),    # ⊈  ,
+    ("period",          [],             0x2289),    # ⊉  .
+    ("equal_sign",      [],             0x2260),    # ≠  =
+    ("e",               [],             0x2204),    # ∄
+]
+
+# Or-equal (⌥⌃/ → =): shift rules before non-shift.
+OR_EQUAL_SYMBOLS = [
+    # key_code          mandatory       codepoint
+    ("comma",           ["shift"],      0x2286),    # ⊆  <
+    ("period",          ["shift"],      0x2287),    # ⊇  >
+    ("equal_sign",      [],             0x2261),    # ≡  =
+]
 
 # Currencies: (iso3166_two_letter_code, codepoint)
 CURRENCIES = [
@@ -188,8 +228,22 @@ def single_key_rules():
     return rules
 
 def two_key_first_rules():
-    """mode 10 → first letter enters mode 11; first digit enters mode 12."""
+    """mode 10 → dispatch to sub-modes."""
     rules = []
+    # Shift rules first (more specific)
+    rules.append({
+        "type": "basic",
+        "conditions": [cond("ss_mode", 10)],
+        "from": from_key("1", ["shift"]),   # ! → negation mode
+        "to": [{"set_variable": {"name": "ss_mode", "value": 13}}],
+    })
+    # Non-shift
+    rules.append({
+        "type": "basic",
+        "conditions": [cond("ss_mode", 10)],
+        "from": from_key("equal_sign"),     # = → or-equal mode
+        "to": [{"set_variable": {"name": "ss_mode", "value": 14}}],
+    })
     for c in LETTERS:
         rules.append({
             "type": "basic",
@@ -209,6 +263,30 @@ def two_key_first_rules():
                 {"set_variable": {"name": "ss_mode", "value": 12}},
                 {"set_variable": {"name": "ss_key1", "value": d}},
             ],
+        })
+    return rules
+
+def negation_rules():
+    """mode 13: negate a relation symbol."""
+    rules = []
+    for key_code, mandatory, cp in NEGATION_SYMBOLS:
+        rules.append({
+            "type": "basic",
+            "conditions": [cond("ss_mode", 13)],
+            "from": from_key(key_code, mandatory),
+            "to": [direct(cp), reset_mode()],
+        })
+    return rules
+
+def or_equal_rules():
+    """mode 14: or-equal / equivalence variant."""
+    rules = []
+    for key_code, mandatory, cp in OR_EQUAL_SYMBOLS:
+        rules.append({
+            "type": "basic",
+            "conditions": [cond("ss_mode", 14)],
+            "from": from_key(key_code, mandatory),
+            "to": [direct(cp), reset_mode()],
         })
     return rules
 
@@ -260,6 +338,8 @@ manipulators = [
     escape_rule(10),
     escape_rule(11, also_reset_key1=True),
     escape_rule(12, also_reset_key1=True),
+    escape_rule(13),
+    escape_rule(14),
 ]
 
 manipulators += body_rules(1, "sup")
@@ -267,6 +347,8 @@ manipulators += greek_sub_rules()
 manipulators += body_rules(2, "sub")
 manipulators += single_key_rules()
 manipulators += two_key_first_rules()
+manipulators += negation_rules()
+manipulators += or_equal_rules()
 manipulators += currency_rules()
 manipulators += fraction_rules()
 
@@ -275,8 +357,8 @@ out = {
     "rules": [{
         "description": (
             "⌥⌃= superscript  ⌥⌃- subscript  "
-            "⌥⌃\\ single-key (arrows ×, ℕℤℚℝℂ, primes, punct)  "
-            "⌥⌃/ two-key (fractions num+den, currencies country-code)"
+            "⌥⌃\\ single-key (logic/set ops, arrows, ℕℤℚℝℂ)  "
+            "⌥⌃/ two-key (fractions, currencies, negation, or-equal)"
         ),
         "manipulators": manipulators,
     }],
