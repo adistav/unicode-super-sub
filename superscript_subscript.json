@@ -4558,38 +4558,6 @@
             }
           ],
           "from": {
-            "key_code": "1",
-            "modifiers": {
-              "optional": [
-                "any"
-              ],
-              "mandatory": [
-                "shift"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 172"
-            },
-            {
-              "set_variable": {
-                "name": "ss_mode",
-                "value": 0
-              }
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            {
-              "type": "variable_if",
-              "name": "ss_mode",
-              "value": 3
-            }
-          ],
-          "from": {
             "key_code": "6",
             "modifiers": {
               "optional": [
@@ -6823,35 +6791,6 @@
           "to": [
             {
               "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8841"
-            },
-            {
-              "set_variable": {
-                "name": "ss_mode",
-                "value": 0
-              }
-            }
-          ]
-        },
-        {
-          "type": "basic",
-          "conditions": [
-            {
-              "type": "variable_if",
-              "name": "ss_mode",
-              "value": 13
-            }
-          ],
-          "from": {
-            "key_code": "equal_sign",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
-          },
-          "to": [
-            {
-              "shell_command": "/Users/adistav/.local/bin/type-unicode direct 8800"
             },
             {
               "set_variable": {

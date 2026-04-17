@@ -34,7 +34,6 @@ GREEK_SUBS = [
 SINGLE_KEY_SYMBOLS = [
     # key_code                  mandatory       codepoint
     # Logic / set operators (shifted keys)
-    ("1",                       ["shift"],      0x00AC),    # ¬  !
     ("6",                       ["shift"],      0x2295),    # ⊕  ^
     ("7",                       ["shift"],      0x2227),    # ∧  &
     ("8",                       ["shift"],      0x00D7),    # ×  *
@@ -83,7 +82,6 @@ NEGATION_SYMBOLS = [
     ("close_bracket",   [],             0x220C),    # ∌  ]
     ("comma",           [],             0x2288),    # ⊈  ,
     ("period",          [],             0x2289),    # ⊉  .
-    ("equal_sign",      [],             0x2260),    # ≠  =
     ("e",               [],             0x2204),    # ∄
 ]
 
