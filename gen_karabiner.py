@@ -58,7 +58,7 @@ SINGLE_KEY_SYMBOLS = [
     ("open_bracket",            [],             0x2208),    # ∈  [
     ("close_bracket",           [],             0x220B),    # ∋  ]
     ("0",                       [],             0x2205),    # ∅
-    ("backslash",               [],             0x2216),    # ∖  \
+    ("s",                       [],             0x2216),    # ∖
     ("d",                       [],             0x25B3),    # △
     ("p",                       [],             0x1D4AB),   # 𝒫
     # Number sets

@@ -5165,7 +5165,7 @@
             }
           ],
           "from": {
-            "key_code": "backslash",
+            "key_code": "s",
             "modifiers": {
               "optional": [
                 "any"
